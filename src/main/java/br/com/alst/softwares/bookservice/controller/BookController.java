@@ -34,7 +34,7 @@ public class BookController {
 		var book = repository.getById(id);
 		if (book == null)
 			throw new RuntimeException("Book not foud!");
-		book.setEnvironment(port);
+		
 		book.setCurrency(currency);
 		
 		/*
@@ -51,6 +51,7 @@ public class BookController {
 		
 		var response = proxy.getCambio(book.getPrice().toString(), "USD", currency);
 		book.setPrice(response.getConvertedValue());
+		book.setEnvironment("Book port: " + port + " | Cambio port: " + response.getEnvironment());
 		/*
 		 * Por algum motivo desconhecido o quando o feign retorna uma classe os campos com valores decimais recebem nulo.
 		 * mas quando retorna uma string o valor decimal está lá, depois é necessário usar o ObjectMapper para converter

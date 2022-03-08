@@ -8,7 +8,13 @@ import br.com.alst.softwares.bookservice.config.CustomFeignClientConfig;
 import br.com.alst.softwares.bookservice.gateway.response.Cambio;
 
 
-@FeignClient(name = "cambio-service", url = "http://localhost:8000", configuration = CustomFeignClientConfig.class)
+//@FeignClient(name = "cambio-service", url = "http://localhost:8000", configuration = CustomFeignClientConfig.class)//Sem utilizar Eureka
+/*
+ * Utilizando o Spring Eureka.
+ * Eureka: é uma solução de service discovery, que em conjunto com outras ferramentas possibilita gerenciamento dinâmico
+ * e escalabilidade para as aplicações, o Eureka também faz pode ser encontrado no sub-projeto spring-cloud-netflix 
+*/
+@FeignClient(name = "cambio-service", configuration = CustomFeignClientConfig.class)
 public interface CambioProxy {
 
 	@GetMapping(value = "/cambio-service/{value}/{from}/{to}")
